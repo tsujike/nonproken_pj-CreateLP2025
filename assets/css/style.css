@@ -10,8 +10,9 @@
 }
 
 html {
-    scroll-behavior: smooth; /* スムーススクロール用 (JSなしでも一応) */
-    font-size: 62.5%; /* 1rem = 10px にする */
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+    /* 1rem = 10px */
 }
 
 body {
@@ -19,18 +20,19 @@ body {
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-bg);
-    font-size: 1.6rem; /* 基本フォントサイズ 16px */
+    font-size: 1.6rem;
+    /* Base font size 16px */
 }
 
 img {
     max-width: 100%;
     height: auto;
-    display: block; /* 画像下の余白対策 */
+    display: block;
 }
 
 ul {
     list-style: none;
-    padding-left: 2rem; /* 基本的なリストのインデント */
+    padding-left: 0;
 }
 
 li {
@@ -46,230 +48,490 @@ a:hover {
     text-decoration: underline;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-bottom: 1.2rem;
     line-height: 1.3;
     font-weight: bold;
     color: var(--color-heading);
 }
 
-h1 { font-size: 3.2rem; }
-h2 { font-size: 2.8rem; }
-h3 { font-size: 2.2rem; }
-p { margin-bottom: 1.6rem; }
+h1 {
+    font-size: 3.6rem;
+}
 
-/* --- CSS Variables (配色などは仮) --- */
+h2 {
+    font-size: 3.0rem;
+}
+
+h3 {
+    font-size: 2.4rem;
+}
+
+p {
+    margin-bottom: 1.6rem;
+}
+
+/* --- Hide Print Header/Footer in Screen View --- */
+.print-header,
+.print-footer {
+    display: none;
+}
+
+/* --- CSS Variables --- */
 :root {
-    --color-primary: #007bff; /* メインカラー (例: 青) */
-    --color-secondary: #6c757d; /* セカンダリカラー (例: グレー) */
-    --color-accent: #ffc107; /* アクセントカラー (例: 黄色) */
-    --color-text: #333; /* 基本テキスト */
-    --color-heading: #111; /* 見出しテキスト */
-    --color-bg: #f8f9fa; /* 基本背景 */
-    --color-bg-slide-alt: #ffffff; /* 代替スライド背景 */
-    --slide-padding-v: 6rem; /* スライドの上下パディング */
-    --slide-padding-h: 3rem; /* スライドの左右パディング */
-    --content-max-width: 800px; /* スライド内コンテンツの最大幅 */
+    --color-primary: #007bff;
+    /* Main blue */
+    --color-secondary: #6c757d;
+    /* Gray */
+    --color-accent: #ffc107;
+    /* Yellow */
+    --color-text: #333;
+    /* Default text */
+    --color-heading: #111;
+    /* Heading text */
+    --color-bg: #f8f9fa;
+    /* Light gray background */
+    --color-bg-slide-alt: #ffffff;
+    /* White background */
+    --slide-padding-v: 6rem;
+    /* Vertical padding for slides */
+    --slide-padding-h: 4rem;
+    /* Horizontal padding for slides */
+    --content-max-width: 960px;
+    /* Max width for slide content */
 }
 
 /* --- Layout --- */
-.presentation-container {
-    /* スライドショー形式にしない場合は不要 */
-}
+.presentation-container {}
 
 .slide {
-    min-height: 100vh; /* 各スライドが最低でも画面の高さを持つ */
+    min-height: 100vh;
     padding: var(--slide-padding-v) var(--slide-padding-h);
-    display: flex; /* コンテンツを中央揃えにする場合 */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* 基本は中央揃え */
-    border-bottom: 1px solid #eee; /* スライドの区切り線 (デバッグ用にも) */
+    border-bottom: 1px solid #eee;
+    /* Separator line */
+}
+
+.slide-content {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    /* Center content horizontally */
+    width: 100%;
+    text-align: left;
+    /* Default to left align */
 }
 
 .slide:nth-child(odd) {
     background-color: var(--color-bg);
 }
-.slide:nth-child(even) {
-    background-color: var(--color-bg-slide-alt);
-}
 
-.slide-content {
-    max-width: var(--content-max-width);
-    width: 100%;
-    /* text-align: left; 左揃えにする場合 */
+.slide:nth-child(even) {
+    /* slide-2, slide-4, slide-6 */
+    background-color: var(--color-bg-slide-alt);
 }
 
 /* --- Component Styles --- */
 .logo {
+    /* General logo style */
     max-width: 150px;
-    margin: 0 auto 2rem auto; /* 中央揃え */
-}
-
-.profile-pic {
-    border-radius: 50%; /* 円形にする */
-    margin: 0 auto 2rem auto; /* 中央揃え */
-    border: 5px solid var(--color-bg-slide-alt); /* 枠線 */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-.profile-pic.large { width: 180px; height: 180px; }
-.profile-pic.medium { width: 120px; height: 120px; }
-
-.subtitle {
-    font-size: 1.8rem;
-    color: var(--color-secondary);
-    margin-top: -1rem;
     margin-bottom: 2rem;
 }
 
-.icon {
-    display: inline-block;
-    margin-right: 0.5em;
-    font-size: 1.2em; /* アイコンサイズ調整 */
-    /* 画像アイコンの場合の例 */
-    /* width: 1.2em; height: 1.2em; vertical-align: middle; */
+.cover-logo {
+    /* Specific style for cover slide logo */
+    display: block;
+    max-width: 80px;
+    /* Small logo */
+    margin: 0 auto 1.5rem auto;
+    /* Center align, bottom margin */
+    /* ★★★ 位置微調整用の設定を追加 ★★★ */
+    position: relative;
+    /* 相対位置指定の基準 */
+    top: 0px;
+    /* 上下位置調整 (正の値で下に、負の値で上にずれる) */
+    left: -310px;
+    /* 左右位置調整 (正の値で右に、負の値で左にずれる) */
 }
 
-.activity-photo, .slide-icon {
-    max-width: 300px; /* 画像サイズ調整 */
-    margin: 2rem auto; /* 中央揃え */
+.profile-pic {
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+}
+
+.profile-pic.large {
+    width: 180px;
+    height: 180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Center */
+.profile-pic.medium {
+    width: 120px;
+    height: 120px;
+}
+
+.subtitle {
+    /* Text below main title/name */
+    font-size: 1.8rem;
+    color: var(--color-secondary);
+    margin-top: -0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.icon {
+    /* Common style for icons */
+    display: inline-block;
+    margin-right: 0.6em;
+    vertical-align: middle;
+    font-size: 1.1em;
+}
+
+.activity-photo,
+.slide-icon {
+    max-width: 600px;
+    margin: 2.5rem auto;
+    /* Center align */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action {
+    /* Highlighted box for call to action */
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #e9ecef;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 4px;
 }
 
 .call-to-action strong {
     color: var(--color-primary);
 }
 
-.invitation {
+.final-word {
+    /* Last message, centered */
     margin-top: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* ★★★ .slide-next の画面表示用スタイル追加 ★★★ */
+.slide-next {
+    text-align: right;
+    /* 右寄せ */
+    margin-top: 3rem;
+    /* 上の要素との間隔 */
+    margin-bottom: 0;
+    /* 下のマージンは0に */
+    font-size: 0.1rem;
+    /* 少し小さめ */
+    color: var(--color-secondary);
+    /* 少し薄い色 */
     font-style: italic;
+    /* イタリック (任意) */
+}
+
+/* --- Slide Specific Styles --- */
+
+/* Slide 1: Cover Slide */
+#slide-1 {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+        /* Dark overlay */
+        url('../images/hero/hero2.jpg');
+    /* Background image */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: white;
+    /* Text color for visibility */
+    padding-top: var(--slide-padding-v);
+}
+
+#slide-1>h1.cover-title {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 0.5em 0;
+    margin-bottom: 2.5rem;
+    font-size: 4.6rem;
+    line-height: 1.35;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-left: calc(-1 * var(--slide-padding-h));
+    margin-right: calc(-1 * var(--slide-padding-h));
+    padding-left: var(--slide-padding-h);
+    padding-right: var(--slide-padding-h);
+}
+
+#slide-1 .slide-content {
+    text-align: center;
+    margin-top: 0;
+}
+
+#slide-1 .cover-catchphrase {
+    font-size: 2.0rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+/* ★★★ 発表者情報のスタイルを追加 ★★★ */
+#slide-1 .presenter-company,
+#slide-1 .presenter-name {
+    font-size: 2.0rem;
+    /* 少し大きく */
+    color: #eee;
+    /* 少し明るい白 */
+    margin-bottom: 0.5rem;
+    /* 行間を詰める */
+    font-weight: normal;
+    /* 500にすると太くなる */
+    letter-spacing: 0.05em;
+    /* 文字間隔を少し広げる */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    /* 影をつける */
+}
+
+#slide-1 .presenter-company {
+    margin-top: 2.5rem;
+    /* キャッチフレーズとの間隔 */
+}
+
+#slide-1 .presenter-name {
+    margin-bottom: 0;
+    /* 下のマージンは不要に */
+}
+
+
+/* Slide 2: Intro Slide */
+#slide-2 {
+    /* Background styles removed */
+}
+
+#slide-2 .slide-content {
+    /* text-align: center removed */
+}
+
+#slide-2 .profile-pic {
+    /* Centering removed */
+}
+
+#slide-2 h1 {
+    font-size: 3.2rem;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    /* 復活 */
+}
+
+#slide-2 .subtitle {
+    opacity: 1.0;
+    margin-bottom: 1.5rem;
     color: var(--color-secondary);
 }
 
-.contact-info {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #eee;
-}
-.contact-info img { /* QRコード用 */
-    max-width: 100px;
-    margin: 1rem auto 0 auto;
-}
-
-/* --- Slide Specific Styles (例) --- */
-#slide-1 h1 {
-    color: var(--color-primary);
-    font-size: 3.6rem; /* タイトルを大きく */
-}
-
-#slide-2 .profile-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    margin-bottom: 3rem;
-    text-align: left;
-}
-
-#slide-2 .history-section {
-    text-align: left;
-    max-width: 600px; /* 少し幅を狭める */
-    margin: 0 auto;
-}
-#slide-2 .history-section h3 {
-    margin-top: 2rem;
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 0.5rem;
-    display: inline-block;
-}
-
-#slide-3 ul, #slide-6 ul {
-    text-align: left;
-    margin: 2rem auto;
-    padding-left: 0; /* デフォルトのリストスタイルをリセット */
-}
-#slide-3 li, #slide-6 li {
-    background: url('assets/images/icons/checkmark.png') no-repeat left center; /* 仮のチェックマークアイコン */
-    background-size: 1.6rem;
-    padding-left: 2.5rem; /* アイコン分のスペース */
+#slide-2 p {
     margin-bottom: 1rem;
 }
 
-#slide-4 .icon.coffee {
-    color: #8B4513; /* コーヒー色 */
+#slide-2 .icon {
+    margin-top: 1rem;
 }
 
-#slide-5 .hobbies {
-    margin-top: 3rem;
-    text-align: left;
-}
-#slide-5 .hobbies h3 {
+/* Slide 3: About Slide */
+#slide-3 .profile-section {
     display: flex;
     align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+#slide-3 .profile-text p {
     margin-bottom: 0.5rem;
 }
-#slide-5 .hobbies .icon {
-    font-size: 1.5em; /* 趣味アイコンを少し大きく */
+
+#slide-3 .history-section {
+    margin-top: 3rem;
+}
+
+#slide-3 .history-section h3 {
+    font-size: 2.0rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--color-primary);
+    display: block;
+    margin-top: 2rem;
+}
+
+#slide-3 .history-section h3:first-of-type {
+    margin-top: 0;
+}
+
+#slide-3 .history-section ul.timeline {
+    list-style: none;
+    padding-left: 1.5em;
+    margin-top: 1rem;
+}
+
+#slide-3 .history-section ul.timeline li {
+    position: relative;
+    margin-bottom: 0.6rem;
+    padding-left: 1em;
+}
+
+#slide-3 .history-section ul.timeline li .icon {
+    position: absolute;
+    left: -1.5em;
+    top: 0.1em;
+    color: var(--color-secondary);
+}
+
+#slide-3 .history-section p {
+    padding-left: 1.5em;
+    position: relative;
+}
+
+#slide-3 .history-section .icon.community {
     color: var(--color-primary);
 }
 
-#slide-7 .invitation .icon {
-    font-size: 1.5em;
-    color: #8B4513; /* コーヒー色 */
-    vertical-align: middle;
+/* Slide 4: Mission Slide */
+/* ★★★ ul の padding-left 削除 ★★★ */
+#slide-4 ul { /* padding-left: 2.5em; を削除 */ }
+#slide-4 li {
+    position: relative;
+    list-style-type: none;
+    /* padding-left: 0; を削除 */
+    /* ★★★ li に padding-left を追加 ★★★ */
+    padding-left: 2.5em; /* アイコン幅 + 隙間 */
+    margin-bottom: 1rem;
+}
+#slide-4 li::before {
+    content: '✔';
+    color: var(--color-primary);
+    position: absolute;
+    /* ★★★ left を padding-left に合わせて調整 ★★★ */
+    left: 0.5em; /* 例: 少し内側に入れる */
+    top: 0.1em;
+    font-size: 1.4em;
+    /* margin-right: 0.8em; は padding で制御するので不要 */
+    width: 1.5em; /* アイコンの占有幅 (調整) */
+    text-align: center; /* アイコンを中央に */
 }
 
-/* --- Responsive Design (Media Queries) --- */
+/* Slide 5: Passion Slide */
+#slide-5 h3 .icon {
+    vertical-align: baseline;
+}
 
+/* Slide 6: Offtime Slide */
+#slide-6 .hobbies {
+    margin-top: 3rem;
+}
+
+#slide-6 .hobbies h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.0rem;
+}
+
+#slide-6 .hobbies p {
+    padding-left: 2.5em;
+    margin-bottom: 1.5rem;
+}
+
+#slide-6 .hobbies .icon {
+    font-size: 1.5em;
+    color: var(--color-primary);
+    margin-right: 0.8em;
+}
+
+#slide-6 .reflection {
+    margin-top: 2rem;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Slide 7: Future Slide */
+/* ★★★ ul の padding-left 削除 ★★★ */
+#slide-7 ul { /* padding-left: 2.5em; を削除 */ }
+#slide-7 li {
+    position: relative;
+    list-style: none;
+    /* padding-left: 0; を削除 */
+    /* ★★★ li に padding-left を追加 ★★★ */
+    padding-left: 2.5em; /* アイコン幅 + 隙間 */
+    margin-bottom: 1rem;
+}
+#slide-7 li::before {
+    content: '👍';
+    position: absolute;
+    /* ★★★ left を padding-left に合わせて調整 ★★★ */
+    left: 0.5em; /* 例: 少し内側に入れる */
+    top: 0;
+    font-size: 1.2em;
+    /* margin-right: 0.8em; は padding で制御するので不要 */
+    width: 1.5em; /* アイコンの占有幅 (調整) */
+    text-align: center; /* アイコンを中央に */
+}
+
+/* --- Responsive Design --- */
 /* Tablet and up */
 @media (min-width: 768px) {
     html {
-        font-size: 65%; /* 少し基本サイズを上げる */
+        font-size: 65%;
     }
-    h1 { font-size: 4.2rem; }
-    h2 { font-size: 3.6rem; }
-    h3 { font-size: 2.6rem; }
+
+    h1 {
+        font-size: 4.2rem;
+    }
+
+    h2 {
+        font-size: 3.6rem;
+    }
+
+    h3 {
+        font-size: 2.8rem;
+    }
 
     .slide {
-        padding: var(--slide-padding-v) calc(var(--slide-padding-h) * 2); /* 横パディングを増やす */
-        text-align: left; /* PCでは左揃えを基本にする */
+        padding: var(--slide-padding-v) calc(var(--slide-padding-h) * 1.5);
     }
 
-    .slide-content {
-        text-align: left; /* コンテンツも左揃え */
+    #slide-1>h1.cover-title {
+        font-size: 5.2rem;
+        margin-left: calc(-1 * var(--slide-padding-h) * 1.5);
+        margin-right: calc(-1 * var(--slide-padding-h) * 1.5);
+        padding-left: calc(var(--slide-padding-h) * 1.5);
+        padding-right: calc(var(--slide-padding-h) * 1.5);
     }
 
-    .logo, .profile-pic, .activity-photo, .slide-icon {
-        margin-left: 0; /* 左揃え */
-        margin-right: auto; /* 右側は自動 */
-    }
-    .profile-pic {
-        margin-bottom: 2rem;
+    #slide-1 .cover-catchphrase {
+        font-size: 2.2rem;
     }
 
-    #slide-1 h1 {
-        font-size: 4.8rem; /* PCでタイトルをさらに大きく */
+    /* ★ 発表者情報もレスポンシブ調整 */
+    #slide-1 .presenter-company,
+    #slide-1 .presenter-name {
+        font-size: 2.2rem;
     }
 
-    #slide-2 .profile-section {
-        justify-content: flex-start; /* 左揃え */
-    }
-    #slide-2 .history-section {
-        margin-left: 0;
+    #slide-2 h1 {
+        font-size: 3.8rem;
     }
 
-    /* 例: 画像とテキストを横並びにする (Slide 5 Hobbies) */
-    #slide-5 .hobbies div { /* 各趣味のブロック */
-       /* display: flex;
-        align-items: flex-start;
-        gap: 2rem;
-        margin-bottom: 2rem; */
-        /* 必要に応じてレイアウト調整 */
+    #slide-3 .profile-section {
+        justify-content: flex-start;
     }
 
-    .contact-info img {
+    #slide-3 .history-section {
         margin-left: 0;
     }
 }
@@ -278,96 +540,315 @@ p { margin-bottom: 1.6rem; }
 @media (min-width: 1024px) {
     :root {
         --slide-padding-v: 8rem;
-        --slide-padding-h: 5rem;
-        --content-max-width: 960px;
+        --slide-padding-h: 6rem;
+        --content-max-width: 1024px;
     }
 
-     /* 例: さらに大きな画面での調整 */
-    #slide-3 ul, #slide-6 ul {
-        column-count: 2; /* リストを2カラムにするなど */
-        column-gap: 4rem;
+    #slide-1>h1.cover-title {
+        font-size: 6.0rem;
+        margin-left: calc(-1 * var(--slide-padding-h));
+        margin-right: calc(-1 * var(--slide-padding-h));
+        padding-left: var(--slide-padding-h);
+        padding-right: var(--slide-padding-h);
     }
 
+    #slide-1 .cover-catchphrase {
+        font-size: 2.4rem;
+    }
+
+    /* ★ 発表者情報もレスポンシブ調整 */
+    #slide-1 .presenter-company,
+    #slide-1 .presenter-name {
+        font-size: 2.4rem;
+    }
+
+    /* #slide-4 ul { column-count: 2; column-gap: 4rem; } */
 }
 
 
+/* ================================================== */
+/* ================= Print Styles =================== */
+/* ================================================== */
 @page {
-    size: A4 landscape; /* 用紙サイズをA4、向きを横に指定 */
-    margin: 1cm; /* 必要に応じて余白を調整 (例: 上下左右1cm) */
+    size: A4 landscape;
+    /* 用紙サイズ: A4 横 */
+    margin: 1cm;
+    /* ページ全体の物理マージン */
+
+    /* @page ルール内のマージンボックスは使わないのでクリア */
+    @top-center {
+        content: "";
+    }
+
+    @bottom-right {
+        content: "";
+    }
+
+    @bottom-left {
+        content: "";
+    }
 }
 
 @media print {
-    /* --- 印刷時全体の設定 --- */
+
+    /* --- Print Defaults --- */
     body {
-        font-size: 10pt; /* 印刷用にフォントサイズを調整 (pt指定が一般的) */
-        color: #000;     /* 文字色を黒に */
-        background-color: #fff; /* 背景を白に */
-        /* 画面表示用の body スタイルを上書き */
+        font-size: 11pt;
+        color: #000;
+        background-color: #fff !important;
     }
 
-    /* --- 印刷に不要な要素を非表示 --- */
-    /* 例: ヘッダーやナビゲーションなどがあれば非表示にする */
-    /* .header, .nav, .footer-for-screen { display: none !important; } */
+    /* ★★★ 印刷時の変数をここで上書き ★★★ */
+    :root {
+        --color-text: #000;
+        --color-heading: #000;
+        --color-primary: #0056b3;
+        --color-secondary: #333;
+        /* ★ フッター上の垂直マージンを増やす */
+        --print-v-margin: 0.6cm;
+        /* 0.3cm から 0.6cm に変更 */
+    }
 
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
 
-    /* --- 各スライド (.slide) の設定 --- */
+    /* --- Print Header --- */
+    .print-header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--print-header-height);
+        /* 1.2cm */
+        padding: 0 0.5cm;
+        background-color: transparent;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .print-header .print-logo {
+        height: 2cm;
+        width: auto;
+        margin: 0;
+        display: block;
+    }
+
+    /* --- Print Footer --- */
+    .print-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--print-footer-height);
+        /* 0.8cm */
+        padding: 0 1cm;
+        background-color: #333;
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .footer-left {
+        flex-basis: 33%;
+    }
+
+    .footer-center {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .footer-center .footer-text {
+        font-size: 7pt;
+        font-weight: normal;
+    }
+
+    .footer-right {
+        flex-basis: 33%;
+        text-align: right;
+    }
+
+    .footer-right .print-page-number-footer {
+        font-size: 7pt;
+        color: white;
+    }
+
+    /* --- Print Slide --- */
     .slide {
-        page-break-before: always; /* 各スライドの前に改ページ (最初のスライドには効かない) */
-        page-break-after: always;  /* 各スライドの後に改ページ */
-        page-break-inside: avoid;  /* スライドの途中で改ページされるのを防ぐ */
-
-        /* 画面表示用のスタイルを印刷用に調整 */
-        min-height: 0;       /* 画面用の高さをリセット */
-        height: auto;        /* コンテンツに応じた高さに */
-        width: 100%;         /* 印刷領域の幅に合わせる */
-        padding: 0.5cm; /* さらに小さく */
-        margin: 0;           /* スライド外側のマージンをリセット */
-        border: none;        /* 画面表示用の境界線を消す */
-        box-shadow: none;    /* 画面表示用の影を消す */
-        display: block;      /* flex などを使っている場合は block に戻すなど調整 */
-        text-align: left;    /* 印刷用にテキスト揃えを調整 */
-        overflow: hidden;    /* はみ出しを隠す (念のため) */
-        line-height: 1.5; /* 行間を少し詰める */
+        page-break-before: always;
+        page-break-after: always;
+        page-break-inside: avoid;
+        min-height: 0;
+        height: auto;
+        width: 100%;
+        /* ★ パディング計算は変数の変更を自動的に反映 */
+        padding-top: calc(var(--print-header-height) + var(--print-v-margin));
+        /* 1.2cm + 0.6cm = 1.8cm */
+        padding-bottom: calc(var(--print-footer-height) + var(--print-v-margin));
+        /* 0.8cm + 0.6cm = 1.4cm */
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        display: block;
+        text-align: left;
+        overflow: hidden;
+        line-height: 1.4;
+        position: relative;
     }
 
-    /* 最初のスライドの前の改ページは不要なので打ち消す */
+    #slide-1 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+
+    #slide-2 {
+        color: inherit;
+        text-shadow: none;
+        background-image: none;
+        background-color: #fff;
+        color: #000;
+    }
+
+    #slide-1>h1.cover-title {
+        margin: 0 0 1em 0 !important;
+        text-align: center !important;
+        font-size: 22pt !important;
+        line-height: 1.3 !important;
+    }
+
+    #slide-1 .presenter-company {
+        margin-top: 1em !important;
+    }
+
+    #slide-1 .presenter-name {
+        font-size: 10pt !important;
+        font-weight: normal !important;
+        letter-spacing: normal !important;
+        margin-bottom: 0.3em !important;
+        text-align: center !important;
+        /* ★ 印刷時のマージン */
+    }
+
+    #slide-2 h1 {
+        background-color: transparent !important;
+        padding: 0 !important;
+        font-size: 16pt !important;
+        margin: 0 0 0.8em 0 !important;
+        text-align: left !important;
+        font-weight: bold !important;
+    }
+
     #slide-1 {
         page-break-before: avoid;
     }
 
-    /* --- 画像や見出しなどの調整 --- */
+
+    /* --- Print Element Adjustments --- */
     img {
-        max-width: 100% !important; /* 幅がはみ出さないように */
+        max-width: 100%;
         height: auto;
     }
 
-    .slide h1, .slide h2, .slide h3, .slide p, .slide ul {
-        margin-bottom: 0.8rem; /* 要素下のマージンを減らす (rem や pt などで調整) */
+    /* ★★★ 印刷時の .cover-logo スタイルを追加 ★★★ */
+    .cover-logo {
+        max-width: 60px !important;
+        /* プロフィール写真などと同程度に */
+        max-height: 60px !important;
+        /* 縦横比維持のため両方指定 */
+        margin: 200px auto 15px auto !important;
+        /* 中央揃え、下マージン調整 */
+        display: block !important;
     }
+
+    .slide h1,
+    .slide h2,
+    .slide h3,
+    .slide p,
+    .slide ul {
+        margin-bottom: 0.5em;
+    }
+
     .slide li {
-        margin-bottom: 0.4rem; /* リスト項目のマージンも減らす */
+        margin-bottom: 0.3em;
     }
 
-    ul, p {
-         /* 必要に応じてフォントサイズやマージンを調整 */
-    }
-
-    /* --- 背景色や背景画像の印刷 --- */
-    /* ブラウザ設定で「背景のグラフィックを印刷」が有効な場合 */
-    /* 強制的に背景を印刷したい場合 (ブラウザ依存あり) */
-    /* .slide { print-color-adjust: exact; -webkit-print-color-adjust: exact; } */
-
-    .slide img {
-        max-width: 80%; /* 例: 横幅を少し抑える */
-        max-height: 15vh; /* 例: 高さに制限をかける (vh は印刷時注意だが目安として) */
-        /* または具体的な cm, pt などで指定 */
-        margin-top: 0.5rem; /* 画像周りのマージンも調整 */
-        margin-bottom: 0.5rem;
-    }
-
-    .profile-pic { /* プロフィール写真など特定の画像 */
-        max-width: 100px !important; /* 例: サイズを具体的に指定 */
+    .profile-pic {
+        max-width: 100px !important;
         max-height: 100px !important;
-   }
+        border-width: 2px !important;
+    }
 
+    #slide-5 img.activity-photo {
+        max-width: 600px !important;
+        width: 600px !important;
+        margin: 0.5rem auto !important;
+        height: auto !important;
+    }
+
+    .slide-icon {
+        max-width: 400px;
+        width: 400px ;
+        margin: 0.5rem auto;
+        height: auto;
+    }
+
+
+    #slide-3 .history-section ul.timeline {
+        padding-left: 1em;
+        margin-top: 0.5em;
+    }
+
+    #slide-3 .history-section ul.timeline li {
+        padding-left: 0.5em;
+        margin-bottom: 0.3em;
+    }
+
+    #slide-3 .history-section ul.timeline li .icon {
+        left: -1em;
+        font-size: 0.9em;
+        top: 0.15em;
+    }
+
+    #slide-4 li::before {
+        font-size: 1.0em;
+        top: 0.15em;
+    }
+
+    #slide-7 li::before {
+        font-size: 0.9em;
+        top: 0.15em;
+    }
+
+    .call-to-action {
+        padding: 0.6rem;
+        border-left-width: 3px;
+        background-color: #f1f1f1 !important;
+        margin-top: 0.8rem;
+    }
+
+    .final-word {
+        font-size: 1.2rem;
+        margin-top: 0.8rem;
+    }
+
+
+    /*印刷時にすべてのページのnextに対してマージンを指定する*/
+ /* margin: 上 右 下 左; の順序 */
+    #slide-1 .slide-next {        margin: 0px auto 300px auto;     }
+    #slide-2 .slide-next {        margin: 0px auto 500px auto;     }
+    #slide-3 .slide-next {        margin: 0px auto 500px auto;     }
+    #slide-4 .slide-next {        margin: 0px auto 500px auto;     }
+    #slide-5 .slide-next {        margin: 0px auto 500px auto;     }
+    #slide-6 .slide-next {        margin: 0px auto 500px auto;     }
+    #slide-7 .slide-next {        margin: 0px auto 500px auto;     }
 }
